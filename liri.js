@@ -10,6 +10,8 @@ var spotify = new Spotify(keys.spotify);
 var command = process.argv[2];
 var input = [];
 
+var consoleLine = "--------------------------------------------------------------------------------------------------------------------"
+
 for (var i = 3; i < process.argv.length; i++) {
     input.push(process.argv[i]);
 }
@@ -31,7 +33,6 @@ if (command === "concert-this") {
 // SPOTIFY THIS SONG
 if (command === "spotify-this-song") {
     userQuery = input.join(" ");
-    console.log("ASDFASDF: " + userQuery);
 
     spotify.search({ type: 'track', query: userQuery }, function (err, data) {
         if (err) {
@@ -48,25 +49,28 @@ if (command === "spotify-this-song") {
 
             return console.log('Error occurred: ' + err);
         }
+        console.log("\r");
+        console.log("SPOTIFY THIS");
 
-        var track = data.tracks.items[0].name;
-        var artist = data.tracks.items[0].artists[0].name;
-        var album = data.tracks.items[0].album.name;
-        var link = data.tracks.items[0].preview_url;
+        for (var i = 0; i < 3; i++) {
+            var track = data.tracks.items[i].name;
+            var artist = data.tracks.items[i].artists[0].name;
+            var album = data.tracks.items[i].album.name;
+            var link = data.tracks.items[i].preview_url;
 
-        console.log("\r\n\r\n");
-        console.log("-------------------------------------");
-        console.log("Spotify Information");
-        console.log("Song: " + track);
-        console.log("Artist: " + artist);
-        console.log("Album: " + album);
-        if (link === null) {
-            console.log("Preview: not available");
-        } else {
-            console.log("Preview: " + link);
+            console.log(consoleLine);
+            console.log("Song: " + track);
+            console.log("Artist: " + artist);
+            console.log("Album: " + album);
+            if (link === null) {
+                console.log("Preview: not available");
+            } else {
+                console.log("Preview: " + link);
+            }
         }
-        console.log("-------------------------------------");
-        console.log("\r\n\r\n");
+        console.log(consoleLine);
+        console.log("\r");
+
     });
 }
 
