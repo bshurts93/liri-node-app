@@ -1,19 +1,23 @@
+
+// APP DEPENDENCIES
 require("dotenv").config();
 var keys = require("./keys.js");
 var Spotify = require("node-spotify-api");
-
-
 var spotify = new Spotify(keys.spotify);
 
-var command = process.argv[2];
-var input = process.argv[3];
 
+// NODE INPUT
+var command = process.argv[2];
+var input = [];
+
+for (var i = 3; i < process.argv.length; i++) {
+    input.push(process.argv[i]);
+}
 
 // CONCERT THIS
 
 // node liri.js concert-this <artist/band name here>
 if (command === "concert-this") {
-    input = "";
 
     console.log("\r\n");
     console.log("-------------------------------------");
@@ -26,8 +30,10 @@ if (command === "concert-this") {
 
 // SPOTIFY THIS SONG
 if (command === "spotify-this-song") {
+    userQuery = input.join(" ");
+    console.log("ASDFASDF: " + userQuery);
 
-    spotify.search({ type: 'track', query: 'All the small things' }, function (err, data) {
+    spotify.search({ type: 'track', query: userQuery }, function (err, data) {
         if (err) {
             return console.log('Error occurred: ' + err);
         }
