@@ -35,6 +35,17 @@ if (command === "spotify-this-song") {
 
     spotify.search({ type: 'track', query: userQuery }, function (err, data) {
         if (err) {
+
+            console.log("\r\n\r\n");
+            console.log("-------------------------------------");
+            console.log("Can't find that song! Here's another.");
+            console.log("Song: The Sign");
+            console.log("Artist: Ace of Base");
+            console.log("Album: Happy Nation");
+            console.log("Preview: not available");
+            console.log("-------------------------------------");
+            console.log("\r\n\r\n");
+
             return console.log('Error occurred: ' + err);
         }
 
