@@ -2,8 +2,11 @@
 // APP DEPENDENCIES
 require("dotenv").config();
 var keys = require("./keys.js");
+
+// NPM PACKAGES
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
+var axios = require("axios")
 
 
 // NODE INPUT
@@ -17,18 +20,16 @@ for (var i = 3; i < process.argv.length; i++) {
 }
 
 // CONCERT THIS
-
-// node liri.js concert-this <artist/band name here>
 if (command === "concert-this") {
+    var userQuery = input.join("%20");
+    var queryURL = "https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp";
 
-    console.log("\r\n");
-    console.log("-------------------------------------");
-    console.log("Concerts for " + artist + ":");
-    console.log("-------------------------------------");
-    console.log("\r\n");
+    axios.get(queryURL)
+        .then(function (response) {
+            console.log(response.data[0]);
+        })
+
 }
-
-
 
 // SPOTIFY THIS SONG
 if (command === "spotify-this-song") {
