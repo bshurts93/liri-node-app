@@ -21,15 +21,15 @@ for (var i = 3; i < process.argv.length; i++) {
 }
 
 // API FUNCTIONS
-function concertThis() {
-    var userQuery = input.join("%20");
-    var queryURL = "https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp";
+function concertThis(artist) {
+    if (!artist) { artist = input.join("%20") };
+    var queryURL = "https://rest.bandsintown.com/artists/" + artist + "/events?app_id=codingbootcamp";
 
     axios.get(queryURL)
         .then(function (response) {
 
             console.log("\r\n\r\n");
-            console.log("BANDSINTOWN DATA");
+            console.log("BANDSINTOWN DATA FOR " + artist.toUpperCase());
             for (var i = 0; i < 5; i++) {
                 var venue = response.data[i].venue.name;
                 var city = response.data[i].venue.city;
@@ -64,7 +64,7 @@ function spotifyThisSong(song) {
             return console.log('Error occurred: ' + err);
         }
         console.log("\r\n\r\n");
-        console.log("SPOTIFY THIS");
+        console.log("SPOTIFY DATA FOR " + song.toUpperCase());
 
         for (var i = 0; i < 3; i++) {
             var track = data.tracks.items[i].name;
@@ -96,7 +96,7 @@ function movieThis(movie) {
             var movie = response.data;
 
             console.log("\r\n\r\n");
-            console.log("OMDB INFORMATION");
+            console.log("OMDB DATA FOR " + movie.Title.toUpperCase());
             console.log(consoleLine);
             console.log("Title: " + movie.Title);
             console.log("Year: " + movie.Year);
@@ -121,12 +121,10 @@ if (command === "spotify-this-song") {
     spotifyThisSong();
 }
 
-
 // MOVIE THIS
 if (command === "movie-this") {
     movieThis();
 }
-
 
 // DO WHAT IT SAYS
 if (command === "do-what-it-says") {
@@ -136,7 +134,7 @@ if (command === "do-what-it-says") {
         // console.log(dataArr);
 
         spotifyThisSong(dataArr[1]);
-        // concertThis(dataArr[3]);
+        concertThis(dataArr[3]);
         movieThis(dataArr[5]);
     });
 }
