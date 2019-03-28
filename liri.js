@@ -27,7 +27,7 @@ if (command === "concert-this") {
     axios.get(queryURL)
         .then(function (response) {
 
-            console.log("\r\n");
+            console.log("\r\n\r\n");
             console.log("BANDSINTOWN DATA");
             for (var i = 0; i < 5; i++) {
                 var venue = response.data[i].venue.name;
@@ -41,7 +41,7 @@ if (command === "concert-this") {
                 console.log("Date: " + date);
             }
             console.log(consoleLine);
-            console.log("\r\n");
+            console.log("\r\n\r\n");
         });
 
 }
@@ -65,7 +65,7 @@ if (command === "spotify-this-song") {
 
             return console.log('Error occurred: ' + err);
         }
-        console.log("\r");
+        console.log("\r\n\r\n");
         console.log("SPOTIFY THIS");
 
         for (var i = 0; i < 3; i++) {
@@ -85,19 +85,34 @@ if (command === "spotify-this-song") {
             }
         }
         console.log(consoleLine);
-        console.log("\r");
-
+        console.log("\r\n\r\n");
     });
 }
 
 
 // MOVIE THIS
 if (command === "movie-this") {
+    var userQuery = input.join("+");
+    var queryURL = "http://www.omdbapi.com/?apikey=c00acbcb&t=" + userQuery;
 
+    axios.get(queryURL)
+        .then(function (response) {
+            var movie = response.data;
 
-
+            console.log("\r\n\r\n");
+            console.log("OMDB INFORMATION");
+            console.log(consoleLine);
+            console.log("Title: " + movie.Title);
+            console.log("Year: " + movie.Year);
+            console.log("Rating: " + movie.Rated);
+            console.log("Rotten Tomatoes: " + movie.Ratings[1].Value);
+            console.log("Language: " + movie.Language);
+            console.log("Actors: " + movie.Actors);
+            console.log("\r");
+            console.log("Plot: " + movie.Plot);
+            console.log("\r\n\r\n");
+        });
 }
-
 
 
 // DO WHAT IT SAYS
