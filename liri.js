@@ -26,8 +26,23 @@ if (command === "concert-this") {
 
     axios.get(queryURL)
         .then(function (response) {
-            console.log(response.data[0]);
-        })
+
+            console.log("\r\n");
+            console.log("BANDSINTOWN DATA");
+            for (var i = 0; i < 5; i++) {
+                var venue = response.data[i].venue.name;
+                var city = response.data[i].venue.city;
+                var region = response.data[i].venue.region;
+                var date = response.data[i].datetime;
+
+                console.log(consoleLine);
+                console.log("Venue: " + venue);
+                console.log("City: " + city + ", " + region);
+                console.log("Date: " + date);
+            }
+            console.log(consoleLine);
+            console.log("\r\n");
+        });
 
 }
 
