@@ -2,6 +2,7 @@
 // APP DEPENDENCIES
 require("dotenv").config();
 var keys = require("./keys.js");
+var fs = require("fs");
 
 // NPM PACKAGES
 var Spotify = require("node-spotify-api");
@@ -13,14 +14,14 @@ var axios = require("axios")
 var command = process.argv[2];
 var input = [];
 
-var consoleLine = "--------------------------------------------------------------------------------------------------------------------"
+var consoleLine = "---------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
 for (var i = 3; i < process.argv.length; i++) {
     input.push(process.argv[i]);
 }
 
-// CONCERT THIS
-if (command === "concert-this") {
+// API FUNCTIONS
+function concertThis() {
     var userQuery = input.join("%20");
     var queryURL = "https://rest.bandsintown.com/artists/" + userQuery + "/events?app_id=codingbootcamp";
 
@@ -43,14 +44,11 @@ if (command === "concert-this") {
             console.log(consoleLine);
             console.log("\r\n\r\n");
         });
-
 }
+function spotifyThisSong(song) {
+    if (!song) { song = input.join(" "); }
 
-// SPOTIFY THIS SONG
-if (command === "spotify-this-song") {
-    userQuery = input.join(" ");
-
-    spotify.search({ type: 'track', query: userQuery }, function (err, data) {
+    spotify.search({ type: 'track', query: song }, function (err, data) {
         if (err) {
 
             console.log("\r\n\r\n");
@@ -88,12 +86,10 @@ if (command === "spotify-this-song") {
         console.log("\r\n\r\n");
     });
 }
+function movieThis(movie) {
+    if (!movie) { movie = input.join("+"); }
 
-
-// MOVIE THIS
-if (command === "movie-this") {
-    var userQuery = input.join("+");
-    var queryURL = "http://www.omdbapi.com/?apikey=c00acbcb&t=" + userQuery;
+    var queryURL = "http://www.omdbapi.com/?apikey=c00acbcb&t=" + movie;
 
     axios.get(queryURL)
         .then(function (response) {
@@ -110,9 +106,37 @@ if (command === "movie-this") {
             console.log("Actors: " + movie.Actors);
             console.log("\r");
             console.log("Plot: " + movie.Plot);
+            console.log(consoleLine);
             console.log("\r\n\r\n");
         });
 }
 
+// CONCERT THIS
+if (command === "concert-this") {
+    concertThis();
+}
+
+// SPOTIFY THIS SONG
+if (command === "spotify-this-song") {
+    spotifyThisSong();
+}
+
+
+// MOVIE THIS
+if (command === "movie-this") {
+    movieThis();
+}
+
 
 // DO WHAT IT SAYS
+if (command === "do-what-it-says") {
+    fs.readFile('random.txt', "utf8", function (err, data) {
+        if (err) throw err;
+        dataArr = data.toString().split(",")
+        // console.log(dataArr);
+
+        spotifyThisSong(dataArr[1]);
+        // concertThis(dataArr[3]);
+        movieThis(dataArr[5]);
+    });
+}
