@@ -7,7 +7,7 @@ var fs = require("fs");
 // NPM PACKAGES
 var Spotify = require("node-spotify-api");
 var spotify = new Spotify(keys.spotify);
-var axios = require("axios")
+var axios = require("axios");
 
 
 // NODE INPUT
@@ -89,7 +89,7 @@ function spotifyThisSong(song) {
 function movieThis(movie) {
     if (!movie) { movie = input.join("+"); }
 
-    var queryURL = "http://www.omdbapi.com/?apikey=c00acbcb&t=" + movie;
+    var queryURL = "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=" + movie;
 
     axios.get(queryURL)
         .then(function (response) {
