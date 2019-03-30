@@ -1,6 +1,7 @@
 
 // APP DEPENDENCIES
 require("dotenv").config();
+var inquirer = require("inquirer")
 var keys = require("./keys.js");
 var fs = require("fs");
 
@@ -19,6 +20,38 @@ var consoleLine = "-------------------------------------------------------------
 for (var i = 3; i < process.argv.length; i++) {
     input.push(process.argv[i]);
 }
+
+// INQUIRER FLOW
+inquirer.prompt([
+    {
+        type: "list",
+        name: "searchType",
+        message: "What would you like to do?",
+        choices: ["Seach concerts", "Search Spotify", "Search movies", "Test app"]
+    }
+]).then(function (answer) {
+    var selection = answer.searchType;
+
+    switch (selection) {
+        case "Search concerts":
+            console.log("SEARCHING CONCERTS");
+            break;
+        case "Search Spotify":
+            console.log("SEARCHING SPOTIFY");
+            break;
+        case "Search movies":
+            console.log("SEARCHING MOVIES");
+            break;
+        case "Test app":
+            console.log("TESTING APP");
+            break;
+        default:
+            console.log("ERR");
+    }
+});
+
+
+
 
 // API FUNCTIONS
 function concertThis(artist) {
