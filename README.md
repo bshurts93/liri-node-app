@@ -21,7 +21,11 @@ Liri is used wherever you use node. In your bash/terminal of choice, run `liri.j
 
 ### Here's a look
 
-GIFS AND STUFF
+![bandsintown search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/bandsintown.gif)
+![spotify search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/spotify.gif)
+![omdb search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/omdb.gif)
+![test gif](https://github.com/bshurts93/liri-node-app/blob/master/images/test.gif)
+
 
 ## Author
 
