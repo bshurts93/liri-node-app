@@ -21,9 +21,16 @@ Liri is used wherever you use node. In your bash/terminal of choice, run `liri.j
 
 ### Here's a look
 
+Search for artist concerts
 ![bandsintown search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/bandsintown.gif)
+
+Search for songs
 ![spotify search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/spotify.gif)
+
+Search for movies
 ![omdb search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/omdb.gif)
+
+Test Liri's functions
 ![test gif](https://github.com/bshurts93/liri-node-app/blob/master/images/test.gif)
 
 
