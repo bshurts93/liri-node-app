@@ -31,4 +31,4 @@ GIFS AND STUFF
 
 * This is a project built during the Vanderbilt Coding Bootcamp, spring 2019
 * Node can be cool!
-* Boy, howdy... - Tim Yager
+* "Boy, howdy..." - Tim Yager
