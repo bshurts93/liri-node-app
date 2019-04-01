@@ -86,6 +86,14 @@ function concertThis(artist) {
                 }
                 console.log(consoleLine);
                 console.log("\r\n\r\n");
+
+                liriMenu();
+            }).catch(function (error) {
+                console.log(consoleLine);
+                console.log("Sorry! No concert data can be found for that artist.");
+                console.log("\r\n");
+                console.log("Error info: " + error);
+                console.log(consoleLine);
             });
     });
 
@@ -136,8 +144,16 @@ function spotifyThisSong(song) {
             }
             console.log(consoleLine);
             console.log("\r\n\r\n");
+
+            liriMenu();
         });
-    });
+    }).catch(function (error) {
+        console.log(consoleLine);
+        console.log("Sorry! No Spotify data can be found for that search.");
+        console.log("\r\n");
+        console.log("Error info: " + error);
+        console.log(consoleLine);
+    });;
 
 
 }
@@ -171,24 +187,17 @@ function movieThis(movie) {
                 console.log("Plot: " + movie.Plot);
                 console.log(consoleLine);
                 console.log("\r\n\r\n");
+
+
+                liriMenu();
             });
     });
 }
-function testApp() {
-    fs.readFile('random.txt', "utf8", function (err, data) {
-        if (err) throw err;
-        dataArr = data.toString().split(",")
-        // console.log(dataArr);
-
-        spotifyThisSong(dataArr[1]);
-        concertThis(dataArr[3]);
-        movieThis(dataArr[5]);
-    });
-}
 
 
-// liriMenu();
-testApp();
+
+liriMenu();
+
 
 
 
