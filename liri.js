@@ -17,9 +17,10 @@ var input = [];
 
 var consoleLine = "---------------------------------------------------------------------------------------------------------------------------------------------------------------";
 
-for (var i = 3; i < process.argv.length; i++) {
-    input.push(process.argv[i]);
-}
+// GRABS CLI INPUT (only used in v1 of original assignment)
+// for (var i = 3; i < process.argv.length; i++) {
+//     input.push(process.argv[i]);
+// }
 
 // INQUIRER BASE PROMPT
 function liriMenu() {
@@ -44,15 +45,13 @@ function liriMenu() {
                 movieThis();
                 break;
             case "Test app":
-                console.log("TESTING APP");
+                testApp();
                 break;
             default:
                 console.log("ERR");
         }
     });
 }
-
-
 
 // API FUNCTIONS
 function concertThis(artist) {
@@ -147,15 +146,7 @@ function spotifyThisSong(song) {
 
             liriMenu();
         });
-    }).catch(function (error) {
-        console.log(consoleLine);
-        console.log("Sorry! No Spotify data can be found for that search.");
-        console.log("\r\n");
-        console.log("Error info: " + error);
-        console.log(consoleLine);
-    });;
-
-
+    });
 }
 function movieThis(movie) {
 
@@ -193,8 +184,106 @@ function movieThis(movie) {
             });
     });
 }
+function testApp() {
+    fs.readFile('random.txt', "utf8", function (err, data) {
+        if (err) throw err;
 
+        dataArr = data.toString().split(",")
 
+        // Extract input data from array
+        var spotifySong = dataArr[1];
+        var bandsAPIArtist = dataArr[3];
+        var movieTitle = dataArr[5];
+
+        // Bandsintown API call
+        var concertURL = "https://rest.bandsintown.com/artists/" + bandsAPIArtist + "/events?app_id=codingbootcamp";
+        axios.get(concertURL)
+            .then(function (response) {
+
+                console.log("\r\n\r\n");
+                console.log("BANDSINTOWN DATA FOR " + bandsAPIArtist.toUpperCase());
+                for (var i = 0; i < 5; i++) {
+                    var venue = response.data[i].venue.name;
+                    var city = response.data[i].venue.city;
+                    var region = response.data[i].venue.region;
+                    var date = response.data[i].datetime;
+
+                    console.log(consoleLine);
+                    console.log("Venue: " + venue);
+                    console.log("City: " + city + ", " + region);
+                    console.log("Date: " + date);
+                }
+                console.log(consoleLine);
+                console.log("\r\n\r\n");
+            }).catch(function (error) {
+                console.log(consoleLine);
+                console.log("Sorry! No concert data can be found for that artist.");
+                console.log("\r\n");
+                console.log("Error info: " + error);
+                console.log(consoleLine);
+            });
+
+        // Spotify API call
+        spotify.search({ type: 'track', query: spotifySong }, function (err, data) {
+            if (err) {
+
+                console.log("\r\n\r\n");
+                console.log("-------------------------------------");
+                console.log("Can't find that song! Here's another.");
+                console.log("Song: The Sign");
+                console.log("Artist: Ace of Base");
+                console.log("Album: Happy Nation");
+                console.log("Preview: not available");
+                console.log("-------------------------------------");
+                console.log("\r\n\r\n");
+
+                return console.log('Error occurred: ' + err);
+            }
+            console.log("\r\n\r\n");
+            console.log("SPOTIFY DATA FOR " + spotifySong.toUpperCase());
+
+            for (var i = 0; i < 3; i++) {
+                var track = data.tracks.items[i].name;
+                var artist = data.tracks.items[i].artists[0].name;
+                var album = data.tracks.items[i].album.name;
+                var link = data.tracks.items[i].preview_url;
+
+                console.log(consoleLine);
+                console.log("Song: " + track);
+                console.log("Artist: " + artist);
+                console.log("Album: " + album);
+                if (link === null) {
+                    console.log("Preview: not available");
+                } else {
+                    console.log("Preview: " + link);
+                }
+            }
+            console.log(consoleLine);
+            console.log("\r\n\r\n");
+        });
+
+        // OMDB API call
+        var movieURL = "http://www.omdbapi.com/?apikey=" + keys.omdb.key + "&t=" + movieTitle;
+        axios.get(movieURL)
+            .then(function (response) {
+                var movie = response.data;
+
+                console.log("\r\n\r\n");
+                console.log("OMDB DATA FOR " + movie.Title.toUpperCase());
+                console.log(consoleLine);
+                console.log("Title: " + movie.Title);
+                console.log("Year: " + movie.Year);
+                console.log("Rating: " + movie.Rated);
+                console.log("Rotten Tomatoes: " + movie.Ratings[1].Value);
+                console.log("Language: " + movie.Language);
+                console.log("Actors: " + movie.Actors);
+                console.log("\r");
+                console.log("Plot: " + movie.Plot);
+                console.log(consoleLine);
+                console.log("\r\n\r\n");
+            });
+    });
+}
 
 liriMenu();
 
