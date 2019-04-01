@@ -21,7 +21,7 @@ Liri is used wherever you use node. In your bash/terminal of choice, run `liri.j
 
 ### Here's a look
 
-GIFS AND STUFF
+![](https://github.com/bshurts93/liri-node-app/blob/master/images/bandsintown.gif)
 
 ## Author
 
