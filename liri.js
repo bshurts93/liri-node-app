@@ -82,9 +82,16 @@ function concertThis(artist) {
                     console.log("Venue: " + venue);
                     console.log("City: " + city + ", " + region);
                     console.log("Date: " + date);
+
+                    fs.appendFile("log.txt", artist + "\n\r\n" + venue + "\n" + city + "\n" + region + "\n" + date + "\n" + consoleLine + "\n\r", function (err) {
+                        if (err) { throw err; }
+                    });
                 }
                 console.log(consoleLine);
                 console.log("\r\n\r\n");
+
+
+
 
                 liriMenu();
             }).catch(function (error) {
@@ -140,6 +147,10 @@ function spotifyThisSong(song) {
                 } else {
                     console.log("Preview: " + link);
                 }
+
+                fs.appendFile("log.txt", "\n\r\n" + track + "\n" + artist + "\n" + album + "\n" + link + "\n\r" + consoleLine, function (err) {
+                    if (err) { throw err; }
+                });
             }
             console.log(consoleLine);
             console.log("\r\n\r\n");
@@ -178,6 +189,10 @@ function movieThis(movie) {
                 console.log("Plot: " + movie.Plot);
                 console.log(consoleLine);
                 console.log("\r\n\r\n");
+
+                fs.appendFile("log.txt", "\n\r\n" + movie.Title + "\n" + movie.Year + "\n" + movie.Rated + "\n" + movie.Ratings[1].Value + "\n" + movie.Language + "\n" + movie.Actors + "\n\r" + consoleLine, function (err) {
+                    if (err) { throw err; }
+                });
 
 
                 liriMenu();
