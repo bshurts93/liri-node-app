@@ -6,13 +6,18 @@ Welcome to Liri, the node.js based language interpretation and recognition inter
 
 It's easy as `npm i`. As long as you have node installed, just download the dependencies included in the package.json.
 
-### APIs used
+### APIs and Dependencies 
 
 Liri utilizes data from the follwing APIs
 
 * [Spotify](https://developer.spotify.com/documentation/web-api/)
 * [Bandsintown](https://manager.bandsintown.com/support/bandsintown-api)
 * [OMDB](http://www.omdbapi.com/)
+* [Axios](https://www.npmjs.com/package/axios)
+* [Dotenv](https://www.npmjs.com/package/dotenv)
+* [Inquirer](https://www.npmjs.com/package/inquirer)
+* [Moment](https://www.npmjs.com/package/moment)
+* [Node Spotify API](https://www.npmjs.com/package/node-spotify-api)
 
 
 ## Running Liri in node
@@ -30,7 +35,7 @@ Liri is used wherever you use node. In your bash/terminal of choice, run `liri.j
 #### Search for movies
 ![omdb search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/omdb.gif)
 
-Test Liri's functions
+#### Test Liri's functions
 ![test gif](https://github.com/bshurts93/liri-node-app/blob/master/images/test.gif)
 
 
