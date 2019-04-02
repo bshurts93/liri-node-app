@@ -19,15 +19,15 @@ Liri utilizes data from the follwing APIs
 
 Liri is used wherever you use node. In your bash/terminal of choice, run `liri.js` and the command line interface will prompt you with your choices. You can search Bandsintown to get tour dates of your favorite artist, Spotify for info on your latest jam, or end that argument with Laura over what year the orinial Star Wars came out. 
 
-### Here's a look
+## Here's a look
 
-Search for artist concerts
+#### Search for artist concerts
 ![bandsintown search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/bandsintown.gif)
 
-Search for songs
+#### Search for songs
 ![spotify search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/spotify.gif)
 
-Search for movies
+#### Search for movies
 ![omdb search gif](https://github.com/bshurts93/liri-node-app/blob/master/images/omdb.gif)
 
 Test Liri's functions
