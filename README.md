@@ -24,6 +24,9 @@ Liri is used wherever you use node. In your bash/terminal of choice, run `liri.j
 #### Test Liri's functions
 ![test gif](https://github.com/bshurts93/liri-node-app/blob/master/images/test.gif)
 
+### Don't use your noggin, just get loggin'
+After each search, the results will be saved to the included file `log.txt`. No need to remember any of the info you search in a session!
+
 ### APIs and Dependencies 
 
 Liri utilizes data from the follwing APIs and NPM packages
