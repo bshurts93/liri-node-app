@@ -2,6 +2,7 @@
 // APP DEPENDENCIES
 require("dotenv").config();
 var inquirer = require("inquirer")
+var moment = require("moment");
 var keys = require("./keys.js");
 var fs = require("fs");
 
@@ -76,7 +77,7 @@ function concertThis(artist) {
                     var venue = response.data[i].venue.name;
                     var city = response.data[i].venue.city;
                     var region = response.data[i].venue.region;
-                    var date = response.data[i].datetime;
+                    var date = moment(response.data[i].datetime).format("MMMM Do YYYY, h:mma");
 
                     console.log(consoleLine);
                     console.log("Venue: " + venue);
@@ -89,9 +90,6 @@ function concertThis(artist) {
                 }
                 console.log(consoleLine);
                 console.log("\r\n\r\n");
-
-
-
 
                 liriMenu();
             }).catch(function (error) {
